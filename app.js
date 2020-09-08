@@ -18,7 +18,7 @@ router.patch('/employees/:id', jsonParser, middlewares.ConvertToObjectID, routes
 router.delete('/employees/:id', middlewares.ConvertToObjectID, routes.employees.deleteEmployee);
 
 router.get('/departments', routes.departments.listAllDepartments);
-//router.get('/departments/:deptName/employees', routes.departments.getDepartmentEmployees);
+router.get('/departments/:deptName/employees', routes.departments.getDepartmentEmployees);
 
 app.use('/api', router);
 

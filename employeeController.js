@@ -2,9 +2,24 @@
 
 function listAllEmployees(req, res) {
   const { collection } = req.app.locals;
-  collection.find({}).toArray()
+  const { orderBy } = req.query;
+  if (orderBy) {
+    const regex = /(.*)(:)(ASC|DESC)/ig;
+    if (regex.test(orderBy)) {
+      let [ column, order ] = orderBy.split(':');
+      (/ASC/i).test(order) ? order = 1 : order = -1;
+      collection.find({}).sort({ [column]: order })
+        .toArray()
+        .then(response => res.status(200).json(response))
+        .catch(error => res.status(500).json(error));
+    } else {
+      return res.status(400).json('If using a filter please use [field]:ASC|DESC');
+    }
+  } else {
+    collection.find({}).toArray()
     .then(response => res.status(200).json(response))
     .catch(error => res.status(500).json(error));
+  }
 }
 
 function listOneEmployee(req, res) {
