@@ -20,12 +20,10 @@ MongoClient.connect(mongo_uri, { useNewUrlParser: true })
           isAdmin: false
         };
         const secret = 's3cr3t';
-        const expiresIn = 60;
+        const expiresIn = 300;
         const token = jwt.sign(payload, secret, { expiresIn });
         console.log(token);
       }
     });
   });
 }).catch(error => console.error(error));
-/* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImJlbWkiLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTk5NjQ2MDM2LCJleHAiOjE1OTk2NDYwOTZ9.L-fGZhzaT7HRHjIJ66iv9oIJZA4oRn26aE2IQjReWtU
-*/
